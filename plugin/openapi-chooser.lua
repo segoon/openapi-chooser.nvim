@@ -22,12 +22,18 @@ local function on_attach(args)
       break
     end
 
+    local node_changed = false
     for child, _ in node:iter_children() do
       if child:type() == 'comment' then
       else
 	node = child
+	node_changed = true
 	break
       end
+    end
+
+    if not node_changed then
+      return nil
     end
   end
 
