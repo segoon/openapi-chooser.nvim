@@ -39,16 +39,19 @@ local function on_attach(args)
 
 
   for child, _ in node:iter_children() do
-    local key = vim.treesitter.get_node_text(child:child(0), 0)
+    local subchild = child:child(0)
+    if subchild then
+      local key = vim.treesitter.get_node_text(subchild, 0)
 
-    if key == 'swagger' then
-      setup_schema('https://json.schemastore.org/swagger-2.0.json')
-      return
-    end
+      if key == 'swagger' then
+        setup_schema('https://json.schemastore.org/swagger-2.0.json')
+        return
+      end
 
-    if key == 'openapi' then
-      setup_schema('https://spec.openapis.org/oas/3.0/schema/2021-09-28')
-      return
+      if key == 'openapi' then
+        setup_schema('https://spec.openapis.org/oas/3.0/schema/2021-09-28')
+        return
+      end
     end
   end
 end
