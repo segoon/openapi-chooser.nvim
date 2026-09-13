@@ -1,5 +1,13 @@
 local vim = vim
 
+vim.schedule(function()
+  vim.notify_once(
+    "openapi-chooser.nvim is deprecated; migrate to segoon/yaml-schema-selector.nvim",
+    vim.log.levels.WARN,
+    { title = "openapi-chooser.nvim" }
+  )
+end)
+
 local function setup_schema(uri)
   for _, client in pairs(vim.lsp.get_clients()) do
     if client['name'] == 'yamlls' then
